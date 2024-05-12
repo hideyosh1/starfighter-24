@@ -19,8 +19,8 @@ dependencies {
     // Use JUnit test framework.
     testImplementation libs.junit
 
-    // This dependency is used by the application.
-    implementation libs.guava
+    // not needed atm
+    // implementation libs.guava
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

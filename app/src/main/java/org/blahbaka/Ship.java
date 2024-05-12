@@ -39,6 +39,7 @@ public class Ship extends MovingThing {
 		try {
 			// this sets ship.jpg as the image for your ship
 			// for this to work ship.jpg needs to be in the same folder as this .java file
+
 			// URL url = getClass().getResource(SHIP_PATH);
 			ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 			InputStream is = classloader.getResourceAsStream(SHIP_PATH);

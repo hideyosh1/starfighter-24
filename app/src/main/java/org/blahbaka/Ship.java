@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 public class Ship extends MovingThing {
 	private int speed;
 	private Image image;
-	private static final String SHIP_PATH = "./ship.jpg";
+	private static final String SHIP_PATH = "ship.jpg";
 
 	public Ship() {
 		this(0, 0, 50, 50, 0);
@@ -28,7 +28,6 @@ public class Ship extends MovingThing {
 	}
 
 	public Ship(int x, int y, int w, int h, int s) {
-		InputStream is = Ship.class.getResourceAsStream("/test.csv");
 		// add code here
 		setPos(x, y);
 		setWidth(w);

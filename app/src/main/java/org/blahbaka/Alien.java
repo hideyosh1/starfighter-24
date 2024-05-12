@@ -11,7 +11,7 @@ public class Alien extends MovingThing {
 	private int speed;
 	private Image image;
 
-	private static final String ALIEN_PATH = "/org/blahbaka/resources/alien.jpg";
+	private static final String ALIEN_PATH = "alien.jpg";
 
 	public Alien() {
 		this(0, 0, 30, 30, 0);

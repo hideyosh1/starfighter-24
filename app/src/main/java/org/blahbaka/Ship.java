@@ -8,10 +8,12 @@ import java.awt.Graphics;
 import java.awt.Image;
 import javax.imageio.ImageIO;
 
+import java.io.InputStream;
+
 public class Ship extends MovingThing {
 	private int speed;
 	private Image image;
-	private static final String SHIP_PATH = "./ship.jpg";
+	private static final String SHIP_PATH = "ship.jpg";
 
 	public Ship() {
 		this(0, 0, 50, 50, 0);
@@ -28,7 +30,6 @@ public class Ship extends MovingThing {
 	}
 
 	public Ship(int x, int y, int w, int h, int s) {
-		InputStream is = Ship.class.getResourceAsStream("/test.csv");
 		// add code here
 		setPos(x, y);
 		setWidth(w);
@@ -38,8 +39,10 @@ public class Ship extends MovingThing {
 		try {
 			// this sets ship.jpg as the image for your ship
 			// for this to work ship.jpg needs to be in the same folder as this .java file
-			URL url = getClass().getResource(SHIP_PATH);
-			image = ImageIO.read(url);
+			// URL url = getClass().getResource(SHIP_PATH);
+			ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+			InputStream is = classloader.getResourceAsStream(SHIP_PATH);
+			image = ImageIO.read(is);
 		} catch (Exception e) {
 			// commit apoptosis
 		}

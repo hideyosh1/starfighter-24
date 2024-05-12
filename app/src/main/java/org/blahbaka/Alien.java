@@ -7,11 +7,13 @@ import java.awt.Graphics;
 import java.awt.Image;
 import javax.imageio.ImageIO;
 
+import java.io.InputStream;
+
 public class Alien extends MovingThing {
 	private int speed;
 	private Image image;
 
-	private static final String ALIEN_PATH = "/org/blahbaka/resources/alien.jpg";
+	private static final String ALIEN_PATH = "alien.jpg";
 
 	public Alien() {
 		this(0, 0, 30, 30, 0);
@@ -32,8 +34,9 @@ public class Alien extends MovingThing {
 		this.speed = s;
 		// add code here
 		try {
-			URL url = getClass().getResource(ALIEN_PATH);
-			image = ImageIO.read(url);
+			ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+			InputStream is = classloader.getResourceAsStream(ALIEN_PATH);
+			image = ImageIO.read(is);
 		} catch (Exception e) {
 			// commit apoptosis
 			//

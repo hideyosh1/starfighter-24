@@ -17,9 +17,10 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 
 	/*
 	 * uncomment and comment as necessary as you add functionality to your project*
-	 * private Bullets shots;
+	 * 
 	 */
 	private AlienHorde horde;
+	private Bullets shots;
 	// private Alien alienOne;
 	// private Alien alienTwo;
 	private Ship ship;
@@ -31,6 +32,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 		setBackground(Color.black);
 
 		keys = new boolean[5];
+		shots = new Bullets();
 
 		// instantiate what you need as you need it (from global objects above)
 		ship = new Ship(0, 0, 1);
@@ -81,13 +83,24 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 
 		// add code to fire a bullet - Part 3
 
+		if (keys[4] == true) {
+			Ammo newammo = new Ammo();
+			newammo.setX(ship.getX() + ship.getWidth() / 2 - newammo.getWidth() / 2);
+			newammo.setY(ship.getY());
+
+			shots.add(newammo);
+			keys[4] = false;
+		}
 		// add in collision detection to see if Bullets hit the Aliens and if Bullets
+		horde.removeDeadOnes(shots.getList());
+
 		// hit the Ship -- Part 3
 
 		// make sure you've drawn all your stuff
 		ship.draw(graphToBack);
-		// alienOne.draw(graphToBack);
-		// alienTwo.draw(graphToBack);
+
+		shots.moveEmAll();
+		shots.drawEmAll(graphToBack);
 		horde.drawEmAll(graphToBack);
 
 		twoDGraph.drawImage(back, null, 0, 0);
@@ -148,4 +161,5 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 			// feel free to add something here, or not
 		}
 	}
+
 }

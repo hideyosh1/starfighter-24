@@ -24,7 +24,7 @@ public class AlienHorde {
 		final int distance = 75;
 		aliens = new ArrayList<Alien>();
 		for (int i = 0; i < size; i++) {
-			add(new Alien(x, y, 5));
+			add(new Alien(x, y, 0));
 			x += distance;
 			if (x > StarFighter.WIDTH) {
 				x = 25;
@@ -53,15 +53,25 @@ public class AlienHorde {
 		}
 	}
 
-	// public void removeDeadOnes(List<Ammo> shots)
-	// {
-	// Part 3
-	// for every shot in the list
-	// check if you've hit any alien in the list
-	// (do the coordinates of the shot fall between the boundarises of the alien)
-	// if they do then remove the alien and the shot
-	// make sure you break out of the loop if this happens
-	// }
+	public void removeDeadOnes(List<Ammo> shots) {
+		/*
+		 * Part 3
+		 * for every shot in the list
+		 * check if you've hit any alien in the list
+		 * (do the coordinates of the shot fall between the boundarises of the alien)
+		 * if they do then remove the alien and the shot
+		 * make sure you break out of the loop if this happens
+		 */
+		for (int i = shots.size() - 1; i >= 0; i--) {
+			for (int j = aliens.size() - 1; j >= 0; j--) {
+				if (aliens.get(j).collides(shots.get(i)) || shots.get(i).collides(aliens.get(j))) {
+					aliens.remove(j);
+					shots.remove(i);
+					break;
+				}
+			}
+		}
+	}
 
 	public String toString() {
 		return "" + aliens;

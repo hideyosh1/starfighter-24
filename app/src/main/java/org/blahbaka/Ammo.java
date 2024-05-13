@@ -1,4 +1,3 @@
-
 package org.blahbaka;
 
 import java.awt.Color;
@@ -13,17 +12,18 @@ public class Ammo extends MovingThing {
 	private static final int WIDTH = 10;
 	private static final int HEIGHT = 10;
 
+
 	public Ammo() {
 		this(10, 10, WIDTH, HEIGHT, SPEED);
 	}
 
 	public Ammo(int x, int y) {
 		// add code
-		this(x, y, 10, 10, SPEED);
+		this(x, y, WIDTH, HEIGHT, SPEED);
 	}
 
 	public Ammo(int x, int y, int s) {
-		this(x, y, 10, 10, s);
+		this(x, y, WIDTH, HEIGHT, s);
 		// add code
 	}
 

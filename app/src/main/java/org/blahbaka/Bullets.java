@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Bullets {
-	private List<Ammo> ammo;
+	List<Ammo> ammo;
 
 	public Bullets() {
 		// initalize ammo
@@ -20,7 +20,6 @@ public class Bullets {
 	public void add(Ammo al) {
 		// add al to list
 		ammo.add(al);
-
 	}
 
 	public void drawEmAll(Graphics window) {
@@ -41,9 +40,8 @@ public class Bullets {
 		// remove it
 		for (int i = ammo.size(); i >= 0; i--) {
 			if (ammo.get(i).getY() < 0) {
-
+				ammo.remove(i);
 			}
-
 		}
 	}
 

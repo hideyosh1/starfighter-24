@@ -72,4 +72,12 @@ public abstract class MovingThing implements Moveable {
 	public String toString() {
 		return getX() + " " + getY() + " " + getWidth() + " " + getHeight();
 	}
+
+	public boolean collides(Moveable b) {
+		return ((getX() >= b.getX() && getX() <= b.getX() + b.getWidth())
+				&&
+				(getY() >= b.getY() && getY() <= b.getY() + b.getHeight()));
+
+	}
+
 }

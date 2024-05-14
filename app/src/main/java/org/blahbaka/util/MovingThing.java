@@ -1,7 +1,7 @@
 
-package org.blahbaka;
+package org.blahbaka.util;
 
-import java.awt.Color;
+// import java.awt.Color;
 import java.awt.Graphics;
 
 public abstract class MovingThing implements Moveable {

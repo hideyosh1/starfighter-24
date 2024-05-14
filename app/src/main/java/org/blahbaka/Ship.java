@@ -1,14 +1,16 @@
 
 package org.blahbaka;
 
-import java.io.File;
-import java.net.URL;
-import java.awt.Color;
+// import java.io.File;
+// import java.net.URL;
+// import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.imageio.ImageIO;
 
 import java.io.InputStream;
+
+import org.blahbaka.util.MovingThing;
 
 public class Ship extends MovingThing {
 	private int speed;

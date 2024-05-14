@@ -1,13 +1,16 @@
 
 package org.blahbaka;
 
-import java.awt.Color;
+// import java.awt.Color;
+// import java.awt.Image;
+// import java.io.File;
+// import javax.imageio.ImageIO;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.io.File;
-import javax.imageio.ImageIO;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.blahbaka.base.Alien;
+import org.blahbaka.base.Ammo;
 
 public class AlienHorde {
 	private List<Alien> aliens;

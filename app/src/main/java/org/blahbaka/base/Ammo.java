@@ -1,10 +1,12 @@
-package org.blahbaka;
+package org.blahbaka.base;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.io.File;
-import javax.imageio.ImageIO;
+// import java.awt.Image;
+// import java.io.File;
+// import javax.imageio.ImageIO;
+
+import org.blahbaka.util.MovingThing;
 
 public class Ammo extends MovingThing {
 	private int speed;

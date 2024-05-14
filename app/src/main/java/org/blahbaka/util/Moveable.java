@@ -1,5 +1,5 @@
 
-package org.blahbaka;
+package org.blahbaka.util;
 
 public interface Moveable {
 	public void setPos(int x, int y);

@@ -1,13 +1,15 @@
-package org.blahbaka;
+package org.blahbaka.base;
 
-import java.io.File;
-import java.net.URL;
-import java.awt.Color;
+// import java.io.File;
+// import java.net.URL;
+// import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.imageio.ImageIO;
 
 import java.io.InputStream;
+import org.blahbaka.util.MovingThing;
+import org.blahbaka.StarFighter;
 
 public class Alien extends MovingThing {
 	private int speed;

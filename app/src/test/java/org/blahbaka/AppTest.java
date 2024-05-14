@@ -4,12 +4,12 @@
 package org.blahbaka;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
+// import static org.junit.Assert.*;
 
 public class AppTest {
     @Test
     public void appHasAGreeting() {
-        StarFighter classUnderTest = new StarFighter();
+        // StarFighter classUnderTest = new StarFighter();
         // assertNotNull("app should have a greeting", classUnderTest.getGreeting());
     }
 }

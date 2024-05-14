@@ -11,9 +11,9 @@ import org.blahbaka.util.Direction;
 
 public class Ammo extends MovingThing {
 	private int speed;
-	private static final int SPEED = 2;
-	private static final int WIDTH = 10;
-	private static final int HEIGHT = 10;
+	public static final int SPEED = 2;
+	public static final int WIDTH = 10;
+	public static final int HEIGHT = 10;
 
 	// public Ammo() {
 	// this(10, 10, WIDTH, HEIGHT, SPEED);

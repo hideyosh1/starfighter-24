@@ -17,9 +17,9 @@ public class Alien extends MovingThing {
 	private int speed;
 	private Image image;
 
-	private static final int WIDTH = 30;
-	private static final int HEIGHT = 30;
-	private static final int SPEED = 1;
+	public static final int WIDTH = 30;
+	public static final int HEIGHT = 30;
+	public static final int SPEED = 1;
 
 	private Direction myh;
 
@@ -83,8 +83,8 @@ public class Alien extends MovingThing {
 
 		}
 
-		if (getX() > StarFighter.WIDTH) {
-			setX(StarFighter.WIDTH);
+		if (getX() > (StarFighter.WIDTH - WIDTH)) {
+			setX(StarFighter.WIDTH - WIDTH);
 			setY(getY() + 40);
 
 			myh = Direction.LEFT;
@@ -105,6 +105,10 @@ public class Alien extends MovingThing {
 	public void draw(Graphics window) {
 		// System.out.println("drawn" + " " + getX() + " " + getY());
 		window.drawImage(image, getX(), getY(), getWidth(), getHeight(), null);
+	}
+
+	public Ammo shoot() {
+		return new Ammo(getX(), getY());
 	}
 
 	public String toString() {

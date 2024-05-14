@@ -24,8 +24,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 	 */
 	private AlienHorde horde;
 	private Bullets shots;
-	// private Alien alienOne;
-	// private Alien alienTwo;
+	private Bullets alienShots;
 	private Ship ship;
 
 	private boolean[] keys;
@@ -36,9 +35,10 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 
 		keys = new boolean[5];
 		shots = new Bullets();
+		alienShots = new Bullets();
 
 		// instantiate what you need as you need it (from global objects above)
-		ship = new Ship(0, 0, 1);
+		ship = new Ship(0, 0);
 		// alienOne = new Alien(100, 50,30, 30, 2);
 		// alienTwo = new Alien(150, 50, 30, 30, 2 );
 		horde = new AlienHorde(20);
@@ -89,25 +89,35 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 		// add code to fire a bullet - Part 3
 
 		if (keys[4] == true) {
-			Ammo newammo = new Ammo(0, ship.getY());
-			newammo.setX(ship.getX() + ship.getWidth() / 2 - newammo.getWidth() / 2);
+			Ammo newammo = new Ammo(
+					ship.getX() + ship.getWidth() / 2 - Ammo.WIDTH / 2,
+					ship.getY());
 
 			shots.add(newammo);
 			keys[4] = false;
 		}
 		// add in collision detection to see if Bullets hit the Aliens and if Bullets
-		horde.removeDeadOnes(shots.getList());
 
 		// hit the Ship -- Part 3
 
 		// make sure you've drawn all your stuff
+
+		shots.moveAll(Direction.UP);
+		horde.moveAll();
+
+		horde.shootAll(alienShots);
+		alienShots.moveAll(Direction.DOWN);
+		alienShots.drawAll(window);
+
+		horde.removeDead(shots.getList());
+		ship.takeDamage(alienShots.getList());
+
+		shots.cleanUp();
+		alienShots.cleanUp();
+
+		shots.drawAll(graphToBack);
+		horde.drawAll(graphToBack);
 		ship.draw(graphToBack);
-
-		shots.moveEmAll();
-		horde.moveEmAll();
-
-		shots.drawEmAll(graphToBack);
-		horde.drawEmAll(graphToBack);
 
 		twoDGraph.drawImage(back, null, 0, 0);
 		back = null;
@@ -164,6 +174,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 	public void run() {
 		try {
 			while (true) {
+				// TODO setup a timer
 				Thread.sleep(5);
 				repaint();
 			}

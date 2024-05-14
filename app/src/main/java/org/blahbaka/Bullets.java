@@ -26,23 +26,23 @@ public class Bullets {
 		ammo.add(al);
 	}
 
-	public void drawEmAll(Graphics window) {
+	public void drawAll(Graphics window) {
 		for (Ammo a : ammo)
 			a.draw(window);
 		// draw each ammo in the list
 	}
 
-	public void moveEmAll() {
+	public void moveAll(Direction direction) {
 		for (Ammo a : ammo)
-			a.move(Direction.UP);
+			a.move(direction);
 		// move each ammon in the list
 	}
 
-	public void cleanEmUp() {
+	public void cleanUp() {
 		// for every ammo in the list
 		// if the ammo is out of bounds
 		// remove it
-		for (int i = ammo.size(); i >= 0; i--) {
+		for (int i = ammo.size() - 1; i >= 0; i--) {
 			if (ammo.get(i).getY() < 0) {
 				ammo.remove(i);
 			}

@@ -46,11 +46,13 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 		setVisible(true);
 	}
 
+	@Override
 	public void update(Graphics window) {
 		paint(window);
 	}
 
 	// the top part of the paint method is done for you
+	@Override
 	public void paint(Graphics window) {
 		// set up the double buffering to make the game animation nice and smooth
 		Graphics2D twoDGraph = (Graphics2D) window;
@@ -84,9 +86,8 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 		// add code to fire a bullet - Part 3
 
 		if (keys[4] == true) {
-			Ammo newammo = new Ammo();
+			Ammo newammo = new Ammo(0, ship.getY());
 			newammo.setX(ship.getX() + ship.getWidth() / 2 - newammo.getWidth() / 2);
-			newammo.setY(ship.getY());
 
 			shots.add(newammo);
 			keys[4] = false;
@@ -100,6 +101,8 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 		ship.draw(graphToBack);
 
 		shots.moveEmAll();
+		horde.moveEmAll();
+
 		shots.drawEmAll(graphToBack);
 		horde.drawEmAll(graphToBack);
 
@@ -107,6 +110,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 		back = null;
 	}
 
+	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			keys[0] = true;
@@ -126,6 +130,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 		repaint();
 	}
 
+	@Override
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			keys[0] = false;
@@ -145,16 +150,18 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 		repaint();
 	}
 
+	@Override
 	public void keyTyped(KeyEvent e) {
 		// no code needed here
 		// method needs to be implemented
 		// because class implements KeyListner
 	}
 
+	@Override
 	public void run() {
 		try {
 			while (true) {
-				Thread.currentThread().sleep(5);
+				Thread.sleep(5);
 				repaint();
 			}
 		} catch (Exception e) {

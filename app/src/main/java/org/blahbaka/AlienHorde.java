@@ -24,7 +24,7 @@ public class AlienHorde {
 		final int distance = 75;
 		aliens = new ArrayList<Alien>();
 		for (int i = 0; i < size; i++) {
-			add(new Alien(x, y, 0));
+			add(new Alien(x, y));
 			x += distance;
 			if (x > StarFighter.WIDTH) {
 				x = 25;

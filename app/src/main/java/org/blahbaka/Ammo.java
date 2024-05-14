@@ -12,20 +12,19 @@ public class Ammo extends MovingThing {
 	private static final int WIDTH = 10;
 	private static final int HEIGHT = 10;
 
-
-	public Ammo() {
-		this(10, 10, WIDTH, HEIGHT, SPEED);
-	}
+	// public Ammo() {
+	// this(10, 10, WIDTH, HEIGHT, SPEED);
+	// }
 
 	public Ammo(int x, int y) {
 		// add code
 		this(x, y, WIDTH, HEIGHT, SPEED);
 	}
 
-	public Ammo(int x, int y, int s) {
-		this(x, y, WIDTH, HEIGHT, s);
-		// add code
-	}
+	// public Ammo(int x, int y, int s) {
+	// this(x, y, WIDTH, HEIGHT, s);
+	// // add code
+	// }
 
 	public Ammo(int x, int y, int w, int h, int s) {
 		super(x, y, w, h);
@@ -48,7 +47,6 @@ public class Ammo extends MovingThing {
 		// use window.setColor(COLOR) to set the color
 		// if you don't set a color, your ammo will be black and you will not see it
 		// use window.fillRect(x,y,w,h); to make a rectangle/square
-		move("");
 		window.setColor(Color.yellow);
 		window.fillRect(getX(), getY(), getWidth(), getHeight());
 	}

@@ -13,21 +13,25 @@ public class Alien extends MovingThing {
 	private int speed;
 	private Image image;
 
+	private static final int WIDTH = 30;
+	private static final int HEIGHT = 30;
+	private static final int SPEED = 1;
+
 	private static final String ALIEN_PATH = "alien.jpg";
 
-	public Alien() {
-		this(0, 0, 30, 30, 0);
-	}
+	// private Alien() {
+	// this(0, 0, WIDTH, HEIGHT, SPEED);
+	// }
 
 	public Alien(int x, int y) {
-		this(x, y, 30, 30, 0);
+		this(x, y, WIDTH, HEIGHT, SPEED);
 		// add code here
 	}
 
-	public Alien(int x, int y, int s) {
-		this(x, y, 30, 30, s);
-		// add code here
-	}
+	// private Alien(int x, int y, int s) {
+	// this(x, y, WIDTH, HEIGHT, s);
+	// // add code here
+	// }
 
 	public Alien(int x, int y, int w, int h, int s) {
 		super(x, y, w, h);
@@ -80,7 +84,6 @@ public class Alien extends MovingThing {
 	 * constantly redrawing it.
 	 */
 	public void draw(Graphics window) {
-		move("");
 		// System.out.println("drawn" + " " + getX() + " " + getY());
 		window.drawImage(image, getX(), getY(), getWidth(), getHeight(), null);
 	}

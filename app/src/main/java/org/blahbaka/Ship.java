@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import java.io.InputStream;
 
 import org.blahbaka.util.MovingThing;
+import org.blahbaka.util.Direction;
 
 public class Ship extends MovingThing {
 	private int speed;
@@ -61,21 +62,22 @@ public class Ship extends MovingThing {
 		return speed;
 	}
 
-	public void move(String direction) {
+	@Override
+	public void move(Direction direction) {
 		// add code here
 		// think about ALL your global variables and how you can use them to "move"
 		// keep your parameter in mind as well
 		switch (direction) {
-			case "UP":
+			case UP:
 				setY(getY() - speed);
 				break;
-			case "LEFT":
+			case LEFT:
 				setX(getX() - speed);
 				break;
-			case "RIGHT":
+			case RIGHT:
 				setX(getX() + speed);
 				break;
-			case "DOWN":
+			case DOWN:
 				setY(getY() + speed);
 				break;
 			default:
@@ -84,6 +86,7 @@ public class Ship extends MovingThing {
 
 	}
 
+	@Override
 	public void draw(Graphics window) {
 		window.drawImage(image, getX(), getY(), getWidth(), getHeight(), null);
 	}

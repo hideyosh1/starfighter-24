@@ -14,6 +14,9 @@ public class StarFighter extends JFrame {
 		super("STARFIGHTER");
 		setSize(WIDTH, HEIGHT);
 
+	}
+
+	public void run() {
 		OuterSpace theGame = new OuterSpace();
 		((Component) theGame).setFocusable(true);
 
@@ -24,6 +27,7 @@ public class StarFighter extends JFrame {
 
 	public static void main(String args[]) {
 		StarFighter run = new StarFighter();
+		run.run();
 	}
 
 }

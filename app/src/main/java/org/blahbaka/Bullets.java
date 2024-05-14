@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.blahbaka.base.Ammo;
 // import org.blahbaka.util.Moveable;
+import org.blahbaka.util.Direction;
 
 public class Bullets {
 	List<Ammo> ammo;
@@ -33,7 +34,7 @@ public class Bullets {
 
 	public void moveEmAll() {
 		for (Ammo a : ammo)
-			a.move("");
+			a.move(Direction.UP);
 		// move each ammon in the list
 	}
 

@@ -8,7 +8,9 @@ import java.awt.Image;
 import javax.imageio.ImageIO;
 
 import java.io.InputStream;
+
 import org.blahbaka.util.MovingThing;
+import org.blahbaka.util.Direction;
 import org.blahbaka.StarFighter;
 
 public class Alien extends MovingThing {
@@ -18,6 +20,8 @@ public class Alien extends MovingThing {
 	private static final int WIDTH = 30;
 	private static final int HEIGHT = 30;
 	private static final int SPEED = 1;
+
+	private Direction myh;
 
 	private static final String ALIEN_PATH = "alien.jpg";
 
@@ -37,7 +41,8 @@ public class Alien extends MovingThing {
 
 	public Alien(int x, int y, int w, int h, int s) {
 		super(x, y, w, h);
-		this.speed = s;
+		speed = s;
+		myh = Direction.RIGHT;
 		// add code here
 		try {
 			ClassLoader classloader = Thread.currentThread().getContextClassLoader();
@@ -59,24 +64,36 @@ public class Alien extends MovingThing {
 		return speed;
 	}
 
-	public void move(String direction) {
+	@Override
+	public void move(Direction direction) {
 		// add code here
 		// check that the alien is within the bounds of the screen (see
 		// Starfighter.java)
 		// if alien is out of bounds change speed direction
 		// and move the alien down a row (40 pixels)
 		// constantly change the x position of the alien by the speed
+		switch (myh) {
+			case LEFT:
+				setX(getX() - speed);
+				break;
+			case RIGHT:
+			default:
+				setX(getX() + speed);
+				break;
+
+		}
 
 		if (getX() > StarFighter.WIDTH) {
 			setX(StarFighter.WIDTH);
 			setY(getY() + 40);
-			speed = -speed;
+
+			myh = Direction.LEFT;
 		} else if (getX() < 0) {
 			setX(0);
 			setY(getY() + 40);
-			speed = -speed;
+
+			myh = Direction.RIGHT;
 		}
-		setX(getX() + speed);
 
 	}
 

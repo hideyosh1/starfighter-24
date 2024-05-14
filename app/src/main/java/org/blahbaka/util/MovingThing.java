@@ -3,6 +3,7 @@ package org.blahbaka.util;
 
 // import java.awt.Color;
 import java.awt.Graphics;
+import org.blahbaka.util.Direction;
 
 public abstract class MovingThing implements Moveable {
 	// add instance variables (look at your constructors)
@@ -65,7 +66,7 @@ public abstract class MovingThing implements Moveable {
 	}
 
 	// do not change code below this line
-	public abstract void move(String direction);
+	public abstract void move(Direction direction);
 
 	public abstract void draw(Graphics window);
 

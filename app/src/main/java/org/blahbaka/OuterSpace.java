@@ -14,6 +14,7 @@ import java.awt.image.BufferedImage;
 // import java.util.ArrayList;
 
 import org.blahbaka.base.Ammo;
+import org.blahbaka.util.Direction;
 
 public class OuterSpace extends Canvas implements KeyListener, Runnable {
 
@@ -73,16 +74,16 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 
 		// add code to move Ship, Alien, etc.-- Part 1
 		if (keys[0] == true) {
-			ship.move("LEFT");
+			ship.move(Direction.LEFT);
 		}
 		if (keys[1] == true) {
-			ship.move("RIGHT");
+			ship.move(Direction.RIGHT);
 		}
 		if (keys[2] == true) {
-			ship.move("UP");
+			ship.move(Direction.UP);
 		}
 		if (keys[3] == true) {
-			ship.move("DOWN");
+			ship.move(Direction.DOWN);
 		}
 
 		// add code to fire a bullet - Part 3

@@ -12,6 +12,8 @@ import java.util.List;
 import org.blahbaka.base.Alien;
 import org.blahbaka.base.Ammo;
 
+import org.blahbaka.util.Direction;
+
 public class AlienHorde {
 	private List<Alien> aliens;
 
@@ -52,7 +54,7 @@ public class AlienHorde {
 	public void moveEmAll() {
 		// make sure you move all aliens in the list
 		for (Alien a : aliens) {
-			a.move("");
+			a.move(Direction.NONE);
 		}
 	}
 

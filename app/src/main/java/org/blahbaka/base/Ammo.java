@@ -7,6 +7,7 @@ import java.awt.Graphics;
 // import javax.imageio.ImageIO;
 
 import org.blahbaka.util.MovingThing;
+import org.blahbaka.util.Direction;
 
 public class Ammo extends MovingThing {
 	private int speed;
@@ -53,8 +54,17 @@ public class Ammo extends MovingThing {
 		window.fillRect(getX(), getY(), getWidth(), getHeight());
 	}
 
-	public void move(String direction) {
-		setY(getY() - speed);
+	@Override
+	public void move(Direction direction) {
+		switch (direction) {
+			case UP:
+				setY(getY() - speed);
+				break;
+			case DOWN:
+			default:
+				setY(getY() + speed);
+
+		}
 		// add code to move the ammo
 		// ship ammo should only move up
 	}

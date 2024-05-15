@@ -10,17 +10,20 @@ public class StarFighter extends JFrame {
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 600;
 
+	private OuterSpace theGame;
+
 	public StarFighter() {
 		super("STARFIGHTER");
+
 		setSize(WIDTH, HEIGHT);
 
+		theGame = new OuterSpace();
+		((Component) theGame).setFocusable(true);
 	}
 
 	public void run() {
-		OuterSpace theGame = new OuterSpace();
-		((Component) theGame).setFocusable(true);
-
 		getContentPane().add(theGame);
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}

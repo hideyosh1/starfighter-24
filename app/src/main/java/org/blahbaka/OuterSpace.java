@@ -2,48 +2,111 @@
 package org.blahbaka;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Canvas;
+import java.awt.BorderLayout;
 import java.awt.event.KeyListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 // import static java.lang.Character.*;
 // import java.awt.event.ActionEvent;
 // import java.awt.event.ActionListener;
 // import java.util.ArrayList;
+import java.io.InputStream;
+
+import java.awt.Font;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import org.blahbaka.base.Ammo;
 import org.blahbaka.util.Direction;
 
-public class OuterSpace extends Canvas implements KeyListener, Runnable {
+public class OuterSpace extends JPanel implements KeyListener, Runnable {
 
 	/*
 	 * uncomment and comment as necessary as you add functionality to your project*
 	 * 
 	 */
+	private boolean running;
+
+	private Font uiFont;
+	private static final String FONT_PATH = "fonts/PixelifySans-Regular.ttf";
+
 	private AlienHorde horde;
 	private Bullets shots;
 	private Bullets alienShots;
 	private Ship ship;
-
 	private boolean[] keys;
-	private BufferedImage back;
+
+	private JPanel menuPanel;
+	private State state;
 
 	public OuterSpace() {
+		super(new BorderLayout());
 		setBackground(Color.black);
+		running = true;
+		state = State.START;
 
 		keys = new boolean[5];
 		shots = new Bullets();
 		alienShots = new Bullets();
 
+		setDoubleBuffered(true);
+
+		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+		InputStream is = classloader.getResourceAsStream(FONT_PATH);
+		try {
+			uiFont = Font.createFont(Font.TRUETYPE_FONT, is);
+			uiFont = uiFont.deriveFont(40.0f);
+		} catch (Exception e) {
+
+		}
+
 		// instantiate what you need as you need it (from global objects above)
-		ship = new Ship(0, 0);
-		// alienOne = new Alien(100, 50,30, 30, 2);
-		// alienTwo = new Alien(150, 50, 30, 30, 2 );
+		ship = new Ship(400, 400);
 		horde = new AlienHorde(20);
 
-		this.addKeyListener(this);
+		menuPanel = new JPanel(new FlowLayout());
+		JLabel title = new JLabel("StarFighter");
+		JButton easy = new JButton("easy");
+		JButton mid = new JButton("medium");
+		JButton hard = new JButton("hard");
+		easy.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				state = State.PLAYING;
+				remove(menuPanel);
+			}
+		});
+		mid.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				state = State.PLAYING;
+				horde.setSpeed(3);
+				remove(menuPanel);
+			}
+		});
+		hard.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				state = State.PLAYING;
+				remove(menuPanel);
+			}
+		});
+		menuPanel.add(title);
+		menuPanel.add(easy);
+		menuPanel.add(mid);
+		menuPanel.add(hard);
+		add(menuPanel);
+
+		title.setVisible(true);
+		easy.setVisible(true);
+		mid.setVisible(true);
+		hard.setVisible(true);
+		menuPanel.setVisible(true);
+
+		addKeyListener(this);
 		new Thread(this).start();
 
 		setVisible(true);
@@ -56,21 +119,37 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 
 	// the top part of the paint method is done for you
 	@Override
-	public void paint(Graphics window) {
-		// set up the double buffering to make the game animation nice and smooth
-		Graphics2D twoDGraph = (Graphics2D) window;
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		switch (state) {
+			case PLAYING:
+				paintPlaying(g);
+				break;
+			case GAMEOVER:
+				break;
+			case START:
+				paintStart(g);
+			default:
+				break;
 
+		}
+	}
+
+	private void paintStart(Graphics window) {
+		revalidate();
+	}
+
+	private void paintPlaying(Graphics window) {
+
+		// set up the double buffering to make the game animation nice and smooth
 		// take a snap shot of the current screen and save it as an image
 		// that is the exact same width and height as the current screen
-		if (back == null)
-			back = (BufferedImage) (createImage(getWidth(), getHeight()));
 
 		// create a graphics reference to the back ground image
 		// we will draw all changes on the background image
-		Graphics graphToBack = back.createGraphics();
 		// this sets the background for the graphics window
-		graphToBack.setColor(Color.BLACK);
-		graphToBack.fillRect(0, 0, getWidth(), getHeight());
+		window.setColor(Color.BLACK);
+		window.fillRect(0, 0, getWidth(), getHeight());
 
 		// add code to move Ship, Alien, etc.-- Part 1
 		if (keys[0] == true) {
@@ -107,7 +186,6 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 
 		horde.shootAll(alienShots);
 		alienShots.moveAll(Direction.DOWN);
-		alienShots.drawAll(window);
 
 		horde.removeDead(shots.getList());
 		ship.takeDamage(alienShots.getList());
@@ -115,12 +193,20 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 		shots.cleanUp();
 		alienShots.cleanUp();
 
-		shots.drawAll(graphToBack);
-		horde.drawAll(graphToBack);
-		ship.draw(graphToBack);
+		alienShots.drawAll(window);
+		shots.drawAll(window);
+		horde.drawAll(window);
+		ship.draw(window);
 
-		twoDGraph.drawImage(back, null, 0, 0);
-		back = null;
+		window.setColor(Color.white);
+		window.setFont(uiFont);
+		window.drawString(
+				"" + ship.getLives() + " "
+						+ (ship.getLives() == 1 ? "life remains"
+								: "lives remain"),
+				0,
+				40);
+
 	}
 
 	@Override
@@ -173,14 +259,21 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 	@Override
 	public void run() {
 		try {
-			while (true) {
-				// TODO setup a timer
+			while (running) {
+				// horrific
 				Thread.sleep(5);
 				repaint();
+
 			}
 		} catch (Exception e) {
 			// feel free to add something here, or not
 		}
+	}
+
+	private enum State {
+		GAMEOVER,
+		START,
+		PLAYING
 	}
 
 }

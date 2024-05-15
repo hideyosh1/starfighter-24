@@ -43,6 +43,11 @@ public class AlienHorde {
 
 	}
 
+	public void setSpeed(int speed) {
+		for (Alien a : aliens)
+			a.setSpeed(speed);
+	}
+
 	public void add(Alien al) {
 		// add an al to the list
 		aliens.add(al);
@@ -89,6 +94,15 @@ public class AlienHorde {
 				}
 			}
 		}
+	}
+
+	public boolean gameOver() {
+		for (Alien a : aliens) {
+			if (a.getY() > StarFighter.HEIGHT) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public String toString() {

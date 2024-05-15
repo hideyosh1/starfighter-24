@@ -24,6 +24,11 @@ public class Ship extends MovingThing {
 	public static final int WIDTH = 50;
 	public static final int HEIGHT = 50;
 	public static final int SPEED = 2;
+	private static final int CYCLES = 10;
+	private static final int BOUNCES = 10;
+
+	private int bounce;
+	private int cycle;
 
 	// public Ship() {
 	// this(0, 0, 50, , 0);
@@ -49,6 +54,8 @@ public class Ship extends MovingThing {
 		setHeight(h);
 		speed = s;
 		lives = 3;
+		bounce = -1;
+		cycle = -1;
 
 		try {
 			// this sets ship.jpg as the image for your ship
@@ -99,18 +106,42 @@ public class Ship extends MovingThing {
 
 	@Override
 	public void draw(Graphics window) {
-		window.drawImage(image, getX(), getY(), getWidth(), getHeight(), null);
+		if (lives <= 0) {
+			return;
+		}
+		if (bounce == -1) {
+			window.drawImage(image, getX(), getY(), getWidth(), getHeight(), null);
+		} else {
+			if (bounce % 2 == 0) {
+				window.drawImage(image, getX(), getY(), getWidth(), getHeight(), null);
+			}
+			cycle--;
+			if (cycle == 0) {
+				cycle = CYCLES;
+				bounce--;
+			}
+		}
 	}
 
 	public void takeDamage(List<Ammo> shots) {
+		if (lives <= 0 || bounce != -1)
+			return;
 		for (int i = shots.size() - 1; i >= 0; i--) {
 			if (collides(shots.get(i)) || shots.get(i).collides(this)) {
 				System.out.println(--lives);
 				shots.remove(i);
+
+				bounce = BOUNCES;
+				cycle = CYCLES;
+
 				break;
 			}
 		}
 
+	}
+
+	public boolean gameOver() {
+		return lives <= 0;
 	}
 
 	public String toString() {
